@@ -9,13 +9,16 @@ isOnline = False
 def start_client():
     global username, isOnline
     username = input("Enter a User Name to join chat: ")
-    s.connect(('localhost', 9999))
-    s.send(bytes(username, "utf-8"))
-    isOnline = True
-    threads = threading.Thread(target=handle_message,args=(s,))
-    threads.start()
-    threads = threading.Thread(target=handle_received_msg,args=(s,))
-    threads.start()
+    try:
+        s.connect(('localhost', 9999))
+        s.send(bytes(username, "utf-8"))
+        isOnline = True
+        threads = threading.Thread(target=handle_message,args=(s,))
+        threads.start()
+        threads = threading.Thread(target=handle_received_msg,args=(s,))
+        threads.start()
+    except ConnectionRefusedError:
+        print("Unable to connect to server...")
 
 
 def handle_received_msg(s):
