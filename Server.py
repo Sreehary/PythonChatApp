@@ -38,7 +38,7 @@ def broadcast_message(clientName, topic):
         if topic == "Join":
             client.send(bytes("{} Joined the chat....".format(clientName), "utf-8"))
         elif topic == "Exit":
-            client.send(bytes("{} Exited the chat....".format(clientName), "utf-8"))
+            client.send(bytes("{} Exit the chat....".format(clientName), "utf-8"))
 
 
 def handle_client_disconnect(c):
